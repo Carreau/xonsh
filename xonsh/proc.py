@@ -354,9 +354,10 @@ def wrap_simple_command(f, args, stdin, stdout, stderr):
             if isinstance(r, str):
                 stdout.write(r)
             elif isinstance(r, abc.Sequence):
-                if r[0] is not None:
+                if r[0] is not None and stdout is not None:
+                    # crash the docker undock command
                     stdout.write(r[0])
-                if r[1] is not None:
+                if r[1] is not None and stderr is not None:
                     stderr.write(r[1])
                 if len(r) > 2 and r[2] is not None:
                     cmd_result = r[2]
