@@ -191,7 +191,7 @@ def premain(argv=None):
         shell_kwargs['login'] = True
     install_hook()
     builtins.__xonsh_shell__ = Shell(**shell_kwargs)
-    for xontrib_module in getattr(builtins.__xonsh_shell__,'xontribs'):
+    for xontrib_module in getattr(builtins.__xonsh_shell__,'xontribs', []):
         getattr(xontrib_module, 'xontrib_init', lambda : None)()
 
     env = builtins.__xonsh_env__
