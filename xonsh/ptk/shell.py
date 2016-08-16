@@ -40,9 +40,6 @@ class PromptToolkitShell(BaseShell):
         self.key_bindings_manager = KeyBindingManager(**key_bindings_manager_args)
         load_xonsh_bindings(self.key_bindings_manager)
 
-        self._prompt_tokens = None
-
-
     def singleline(self, store_in_history=True, auto_suggest=None,
                    enable_history_search=True, multiline=True, **kwargs):
         """Reads a single line of input from the shell. The store_in_history
@@ -61,8 +58,8 @@ class PromptToolkitShell(BaseShell):
         multicolumn = (completions_display == 'multi')
         self.styler.style_name = env.get('XONSH_COLOR_STYLE')
         completer = None if completions_display == 'none' else self.pt_completer
-        self._prompt_tokens = self.prompt_tokens(None)
-        get_prompt_tokens = lambda cli: self._prompt_tokens
+        prompt_tokens = self.prompt_tokens(None)
+        get_prompt_tokens = lambda cli: prompt_tokens
         rprompt_tokens = self.rprompt_tokens(None)
         get_rprompt_tokens = lambda cli: rprompt_tokens
         with self.prompter:
