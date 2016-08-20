@@ -331,6 +331,7 @@ class XonshStyle(Style):
         compound = CompoundColorMap(ChainMap(self.trap, cmap, PTK_STYLE, self._smap))
         self.styles = ChainMap(self.trap, cmap, PTK_STYLE, self._smap, compound)
         self._style_name = value
+        self.styles[Token.AutoSuggestion] = '#ansidarkgreen'
         if ON_WINDOWS:
             self.enhance_colors_for_cmd_exe()
 
