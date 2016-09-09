@@ -5,5 +5,5 @@ matrix:
           python: "nightly"
 
 install: pip install -r requirements-tests.txt
-script: py.test --timeout=10;
+script: python -m pytest 
 
