@@ -21,13 +21,6 @@ CMDS = ['ls', 'cat hello kitty', 'abc', 'def', 'touch me', 'grep from me']
 
 @pytest.mark.parametrize('inp, commands, offset', [
     ('', CMDS, (0, 1)),
-    ('-r', list(reversed(CMDS)), (len(CMDS)- 1, -1)),
-    ('0', CMDS[0:1], (0, 1)),
-    ('1', CMDS[1:2], (1, 1)),
-    ('-2', CMDS[-2:-1], (len(CMDS) -2 , 1)),
-    ('1:3', CMDS[1:3], (1, 1)),
-    ('1::2', CMDS[1::2], (1, 2)),
-    ('-4:-2', CMDS[-4:-2], (len(CMDS) - 4, 1))
     ])
 def test_show_cmd_numerate(inp, commands, offset, hist, xonsh_builtins, capsys):
     """Verify that CLI history commands work."""
