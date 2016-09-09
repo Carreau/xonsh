@@ -4,12 +4,6 @@ matrix:
         - os: linux
           python: "nightly"
           env: RUN_COVERAGE=true
-        - os: osx
-          language: generic
-          env: PYTHON="3.4" MINICONDA_OS="MacOSX"
-        - os: osx
-          language: generic
-          env: PYTHON="3.5" MINICONDA_OS="MacOSX"
 
 before_install:
   - if [[ ! "$TRAVIS_PYTHON_VERSION" == "nightly" ]]; then
