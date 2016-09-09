@@ -12,9 +12,9 @@ import pytest
 
 @pytest.yield_fixture
 def hist():
-    h = History(filename='xonsh-HISTORY-TEST.json', here='yup', sessionid='SESSIONID', gc=False)
-    yield h
-    os.remove(h.filename)
+    #h = History(filename='xonsh-HISTORY-TEST.json', here='yup', sessionid='SESSIONID', gc=False)
+    yield 1
+    #os.remove(h.filename)
 
 
 CMDS = ['ls', 'cat hello kitty', 'abc', 'def', 'touch me', 'grep from me']
