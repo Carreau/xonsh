@@ -31,18 +31,3 @@ def test_hist_append(hist, xonsh_builtins):
     assert 'still alive' == hist.buffer[0]['joco']
 
 
-def test_hist_flush(hist, xonsh_builtins):
-    """Verify explicit flushing of the history works."""
-    hf = hist.flush()
-    assert hf is None
-    xonsh_builtins.__xonsh_env__['HISTCONTROL'] = set()
-    hist.append({'joco': 'still alive'})
-    hf = hist.flush()
-    assert hf is not None
-    while hf.is_alive():
-        pass
-    with LazyJSON(hist.filename) as lj:
-        obs = lj['cmds'][0]['joco']
-    assert 'still alive' == obs
-
-
