@@ -42,7 +42,7 @@ class Execer(object):
         load_builtins(execer=self, config=config, login=login, ctx=xonsh_ctx)
 
     def __del__(self):
-        if self.unload:
+        if self.unload and unload_builtins:
             unload_builtins()
 
     def parse(self, input, ctx, mode='exec', filename=None, transform=True):

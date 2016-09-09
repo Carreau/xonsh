@@ -233,7 +233,8 @@ class ReadlineShell(BaseShell, cmd.Cmd):
         self.cmdqueue = collections.deque()
 
     def __del__(self):
-        teardown_readline()
+        if teardown_readline:
+            teardown_readline()
 
     def singleline(self, store_in_history=True, **kwargs):
         """Reads a single line of input. The store_in_history kwarg
