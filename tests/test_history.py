@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 """Tests the xonsh history."""
 # pylint: disable=protected-access
-import io
 import os
-import sys
 import shlex
 
 from xonsh.lazyjson import LazyJSON
-from xonsh.history import History, _hist_create_parser, _hist_parse_args
+from xonsh.history import History
 from xonsh import history
 
 import pytest
@@ -154,50 +152,3 @@ def test_histcontrol(hist, xonsh_builtins):
     assert 0 == hist.buffer[-1]['rtn']
 
 
-@pytest.mark.parametrize('args', [ '-h', '--help', 'show -h', 'show --help'])
-def test_parse_args_help(args, capsys):
-    with pytest.raises(SystemExit):
-        args = _hist_parse_args(shlex.split(args))
-    assert 'show this help message and exit' in capsys.readouterr()[0]
-
-
-@pytest.mark.parametrize('args, exp', [
-    ('', ('show', 'session', [], False, False)),
-    ('1:5', ('show', 'session', ['1:5'], False, False)),
-    ('show', ('show', 'session', [], False, False)),
-    ('show 15', ('show', 'session', ['15'], False, False)),
-    ('show bash 3:5 15:66', ('show', 'bash', ['3:5', '15:66'], False, False)),
-    ('show -r', ('show', 'session', [], False, True)),
-    ('show -rn bash', ('show', 'bash', [], True, True)),
-    ('show -n -r -30:20', ('show', 'session', ['-30:20'], True, True)),
-    ('show -n zsh 1:2:3', ('show', 'zsh', ['1:2:3'], True, False))
-    ])
-def test_parser_show(args, exp):
-    # use dict instead of argparse.Namespace for pretty pytest diff
-    exp_ns = {'action': exp[0],
-              'session': exp[1],
-              'slices': exp[2],
-              'numerate': exp[3],
-              'reverse': exp[4],
-              'start_time': None,
-              'end_time': None,
-              'datetime_format': None,
-              'timestamp': False}
-    ns = _hist_parse_args(shlex.split(args))
-    assert ns.__dict__ == exp_ns
-
-
-@pytest.mark.parametrize('index, exp', [
-    (-1, 'grep from me'),
-    ('hello', 'cat hello kitty'),
-    ((-1, -1), 'me'),
-    (('hello', 0), 'cat'),
-    ((-1, slice(0,2)), 'grep from'),
-    (('kitty', slice(1,3)), 'hello kitty')
-])
-def test_history_getitem(index, exp, hist, xonsh_builtins):
-    xonsh_builtins.__xonsh_env__['HISTCONTROL'] = set()
-    for ts,cmd in enumerate(CMDS):  # populate the shell history
-        hist.append({'inp': cmd, 'rtn': 0, 'ts':(ts+1, ts+1.5)})
-
-    assert hist[index] == exp

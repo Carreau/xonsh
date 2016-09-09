@@ -5,11 +5,10 @@ import importlib
 from traceback import format_list, extract_tb
 
 import pytest
-from xonsh.imphooks import install_hook
 
 
 def pytest_configure(config):
-    install_hook()
+    pass
 
 
 def pytest_collection_modifyitems(items):
