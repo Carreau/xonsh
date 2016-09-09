@@ -46,23 +46,3 @@ def test_hist_flush(hist, xonsh_builtins):
     assert 'still alive' == obs
 
 
-def test_cmd_field(hist, xonsh_builtins):
-    # in-memory
-    xonsh_builtins.__xonsh_env__['HISTCONTROL'] = set()
-    hf = hist.append({'rtn': 1})
-    assert hf is None
-    assert 1 == hist.rtns[0]
-    assert 1 == hist.rtns[-1]
-    assert None == hist.outs[-1]
-    # slice
-    assert [1] == hist.rtns[:]
-    # on disk
-    hf = hist.flush()
-    assert hf is not None
-    assert 1 == hist.rtns[0]
-    assert 1 == hist.rtns[-1]
-    assert None == hist.outs[-1]
-
-
-CMDS = ['ls', 'cat hello kitty', 'abc', 'def', 'touch me', 'grep from me']
-
