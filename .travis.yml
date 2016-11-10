@@ -60,9 +60,9 @@ script:
       py.test --timeout=10;
     fi
 doctr:
-  - foo : bar
-  - qux : 13
-  - branches:
+  foo : bar
+  qux : 13
+  branches:
       - docv
 
 # This block should be inserted after line 52 for the next release.
