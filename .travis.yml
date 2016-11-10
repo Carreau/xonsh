@@ -39,7 +39,7 @@ install:
       python setup.py install;
       pip install -r requirements-docs.txt;
       pip install pygments prompt_toolkit ply psutil ipykernel matplotlib doctr --upgrade;
-      pip install git+https://github.com/Carreau/doctr@travis-config#egg=doctr --upgrade
+      pip install git+https://github.com/Carreau/doctr@travis-config#egg=doctr --upgrade;
     else
       pip install -r requirements-tests.txt;
     fi
