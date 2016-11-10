@@ -38,8 +38,8 @@ install:
   - if [[ $BUILD_DOCS = true ]]; then
       python setup.py install;
       pip install -r requirements-docs.txt;
-      pip install pygments prompt_toolkit ply psutil ipykernel matplotlib doctr;
-      pip install git+https://github.com/Carreau/doctr/@travis-config#egg=doctr
+      pip install pygments prompt_toolkit ply psutil ipykernel matplotlib doctr --upgrade;
+      pip install git+https://github.com/Carreau/doctr@travis-config#egg=doctr --upgrade
     else
       pip install -r requirements-tests.txt;
     fi
@@ -62,6 +62,8 @@ script:
 doctr:
   - foo : bar
   - qux : 13
+  - branches:
+      - docv
 
 # This block should be inserted after line 52 for the next release.
 #      git checkout $(git describe --tags `git rev-list --tags --max-count=1`);
