@@ -39,6 +39,7 @@ install:
       python setup.py install;
       pip install -r requirements-docs.txt;
       pip install pygments prompt_toolkit ply psutil ipykernel matplotlib doctr;
+      pip install git+https://github.com/Carreau/doctr/@travis-config#egg=doctr
     else
       pip install -r requirements-tests.txt;
     fi
@@ -46,7 +47,7 @@ install:
 
 script:
   - if [[ $BUILD_DOCS = true ]]; then
-      echo "buildign docs"
+      echo "building docs"
       cd docs;
       make html;
       echo "make html done"
