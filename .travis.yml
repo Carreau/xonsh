@@ -65,7 +65,7 @@ doctr:
   branches:
       - docv
       - master
-      - '*'
+      - '.*'
 
 # This block should be inserted after line 52 for the next release.
 #      git checkout $(git describe --tags `git rev-list --tags --max-count=1`);
