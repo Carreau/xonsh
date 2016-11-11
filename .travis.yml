@@ -50,10 +50,8 @@ script:
       echo "building docs";
       cd docs;
       make html;
-      echo "make html done";
       cd ..;
-      echo "calling doctr";
-      doctr deploy --deploy-repo xonsh/xonsh-docs --gh-pages-docs dev --command='python docs/fixdocselector.py docs' --no-push --no-require-master; 
+      doctr deploy --deploy-repo xonsh/xonsh-docs --gh-pages-docs dev --command='python fixdocselector.py docs' --no-push --no-require-master; 
       echo "doctr done";
     else
       echo "pytest timeout";
