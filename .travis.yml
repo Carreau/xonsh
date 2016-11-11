@@ -48,10 +48,11 @@ install:
 script:
   - if [[ $BUILD_DOCS = true ]]; then
       echo "building docs";
+      cp docs/fixdocselector.py ~/ ;
       cd docs;
       make html;
       cd ..;
-      doctr deploy --deploy-repo xonsh/xonsh-docs --gh-pages-docs dev --command='python fixdocselector.py docs' --no-push --no-require-master; 
+      doctr deploy --deploy-repo xonsh/xonsh-docs --gh-pages-docs dev --command='python ~/fixdocselector.py docs' --no-push --no-require-master; 
       echo "doctr done";
     else
       echo "pytest timeout";
