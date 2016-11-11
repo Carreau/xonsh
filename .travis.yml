@@ -38,7 +38,12 @@ install:
 script:
   - if [[ $BUILD_DOCS = true ]]; then
       echo "building docs";
+      echo "moving foxdocselector from docs";
       cp docs/fixdocselector.py ~/ ;
+      echo "moved from docs";
+      echo "===============";
+      ls ~/
+      echo "===============";
       cd docs;
       make html;
       cd ..;
