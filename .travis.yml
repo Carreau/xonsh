@@ -42,7 +42,7 @@ script:
       cp docs/fixdocselector.py ~/ ;
       echo "moved from docs";
       echo "===============";
-      ls ~/
+      ls ~/ ;
       echo "===============";
       cd docs;
       make html;
